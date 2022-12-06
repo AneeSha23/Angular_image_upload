@@ -52,6 +52,7 @@ onUpdate(){
     .putProfile(this.editForm.value.name,this.editForm.value.age,this.editForm.value.place,this.editForm.value.profile,this.paramsId)
     .subscribe(()=>{
       console.log("Data Updated successfulyy")
+      alert("Data updated successfully")
       this.router.navigate(['/'])
     })
 }

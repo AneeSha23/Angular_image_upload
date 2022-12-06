@@ -36,7 +36,7 @@ export class ApiService {
     formData.append('age',age)
     formData.append('place',place)
     formData.append('profile',profileImage)
-    return this.http.post(`${this.apiUrl}/${Id}`,formData)
+    return this.http.put(`${this.apiUrl}/${Id}`,formData)
   }
   deleteProfile(id:any):Observable<any>{
     let Id=id
