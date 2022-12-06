@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="card  mb-3 " >
+        <div class="row g-0" *ngFor="let profile of singleProfile">
+          <div class="col-md-5">
+            <img [src]="profile.image" class="img-fluid rounded-start w-100 h-100" alt="single profile image">
+          </div>
+          <div class="col-md-7">
+            <div class="card-body" >
+              <h5 class="card-title">Name:  {{profile.name}}</h5>
+              <h5 class="card-title">Age:  {{profile.age}}</h5>
+              <h5 class="card-title">Place:  {{profile.place}}</h5>
+              <div class="buttons mt-5">
+                <button class="btn btn-info" [routerLink]="['/edit',profile.id]">Update</button>
+                &nbsp;
+                <button class="btn btn-danger" (click)="removeProfile()">Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>

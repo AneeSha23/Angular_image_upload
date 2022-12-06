@@ -1,0 +1,25 @@
+<div class="container">
+    <table class="table table-hover mt-5">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Profile</th>
+            <th scope="col">Name</th>
+            <th scope="col">Age</th>
+            <th scope="col">Place</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr [routerLink]="['/view',profile.id]" *ngFor="let profile of allProfiles">
+            <th scope="row">{{profile.id}}</th>
+            <td>
+                <img [src]="profile.image" alt="profile image" width="100px" height="100px">
+            </td>
+            <td>{{profile.name}}</td>
+            <td>{{profile.age}}</td>
+            <td>{{profile.place}}</td>
+          </tr>
+         
+        </tbody>
+      </table>
+</div>

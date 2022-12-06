@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="card mt-5">
+        <div class="card-header">
+          <h3>Add Profile</h3>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="createForm">
+                <div class="mb-3">
+                  <label class="form-label">Name </label>
+                  <input formControlName="name" type="text" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Age </label>
+                    <input formControlName="age" type="text" class="form-control">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Place </label>
+                    <input formControlName="place" type="text" class="form-control">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Profile Image </label>
+                    <input (change)="selectImage($event)"  type="file"  class="form-control">
+                  </div>
+                <button (click)="onCreate()" type="submit" class="btn btn-success mt-2">Submit</button>
+              </form>
+        </div>
+      </div>
+</div>
