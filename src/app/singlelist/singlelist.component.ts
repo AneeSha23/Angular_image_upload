@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { ApiService } from '../shared/api.service';
 
 @Component({
@@ -34,10 +35,52 @@ singleProfile:any
 
   // delete
   removeProfile(){
-    this.apiService.deleteProfile(this.paramId).subscribe((data)=>{
-      console.log("profile deleted")
-      alert("Profile deleted")
-      this.router.navigate(['/'])
+
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success ms-3 ',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
     })
+    
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then((result:any) => {
+      if (result.isConfirmed) {
+        this.apiService.deleteProfile(this.paramId).subscribe(()=>{
+          swalWithBootstrapButtons.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          ).then(()=>{
+            this.router.navigate(['/'])
+          })
+        
+        })
+        
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelled',
+          'Your  file is safe :)',
+          'error'
+        )
+      }
+    })
+
+
+
+
+
+    
   }
 }

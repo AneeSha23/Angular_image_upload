@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { ApiService } from '../shared/api.service';
 
 @Component({
@@ -39,11 +40,18 @@ export class CreateComponent implements OnInit {
 
   onCreate(){
     // console.log(this.createForm.value)
-    
+   
     this.apiService.postProfile(this.createForm.value.name,this.createForm.value.age,this.createForm.value.place,this.createForm.value.profile).subscribe((data)=>{
       // console.log(data)
-      alert("profile added successfully")
-      this.router.navigate(['/'])
+      Swal.fire({
+
+        icon: 'success',
+        title: 'New Profile added',
+        showConfirmButton: true
+      }).then(()=>{
+        this.router.navigate(['/'])
+      })
+      
     })
   }
 }

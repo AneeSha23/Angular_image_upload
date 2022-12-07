@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { ApiService } from '../shared/api.service';
 
 @Component({
@@ -51,9 +52,14 @@ onUpdate(){
   this.apiService
     .putProfile(this.editForm.value.name,this.editForm.value.age,this.editForm.value.place,this.editForm.value.profile,this.paramsId)
     .subscribe(()=>{
-      console.log("Data Updated successfulyy")
-      alert("Data updated successfully")
-      this.router.navigate(['/'])
+      Swal.fire({
+
+        icon: 'success',
+        title: `"${this.editForm.value.name}" updated added` ,
+        showConfirmButton: true
+      }).then(()=>{
+        this.router.navigate(['/'])
+      })
     })
 }
 
