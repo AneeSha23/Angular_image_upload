@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../shared/api.service';
+import Aos from "aos";
 
 @Component({
   selector: 'app-list',
@@ -9,17 +10,18 @@ import { ApiService } from '../shared/api.service';
 export class ListComponent implements OnInit {
 
 
-  allProfiles:any
-  constructor(private apiService : ApiService) { }
+  allProfiles: any
+  constructor(private apiService: ApiService) { }
 
   ngOnInit(): void {
     this.listProfile()
+    Aos.init();
   }
 
-  listProfile(){
-    this.apiService.getProfile().subscribe((data)=>{
+  listProfile() {
+    this.apiService.getProfile().subscribe((data) => {
       // console.log(data)
-      this.allProfiles=data
+      this.allProfiles = data
     })
   }
 

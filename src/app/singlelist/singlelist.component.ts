@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import Aos from 'aos';
 import Swal from 'sweetalert2';
 import { ApiService } from '../shared/api.service';
 
@@ -9,32 +10,34 @@ import { ApiService } from '../shared/api.service';
   styleUrls: ['./singlelist.component.css']
 })
 export class SinglelistComponent implements OnInit {
-paramId:any
-singleProfile:any
-  constructor(private apiService:ApiService,
-              private actiavtedroute:ActivatedRoute,
-              private router:Router
-              ) { }
+  paramId: any
+  singleProfile: any
+  constructor(private apiService: ApiService,
+    private actiavtedroute: ActivatedRoute,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
-    this.paramId=this.actiavtedroute.snapshot.params['id']
-  //  console.log(this.paramId)
-   this.listOneProfile()
+    this.paramId = this.actiavtedroute.snapshot.params['id']
+    //  console.log(this.paramId)
+    this.listOneProfile()
+
+    Aos.init()
   }
 
 
-   
 
-  listOneProfile(){
-    this.apiService.getSingleProfile(this.paramId).subscribe((data)=>{
+
+  listOneProfile() {
+    this.apiService.getSingleProfile(this.paramId).subscribe((data) => {
       // console.log(data)
-      this.singleProfile=data
+      this.singleProfile = data
     })
   }
 
 
   // delete
-  removeProfile(){
+  removeProfile() {
 
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
@@ -43,7 +46,7 @@ singleProfile:any
       },
       buttonsStyling: false
     })
-    
+
     swalWithBootstrapButtons.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -52,19 +55,19 @@ singleProfile:any
       confirmButtonText: 'Yes, delete it!',
       cancelButtonText: 'No, cancel!',
       reverseButtons: true
-    }).then((result:any) => {
+    }).then((result: any) => {
       if (result.isConfirmed) {
-        this.apiService.deleteProfile(this.paramId).subscribe(()=>{
+        this.apiService.deleteProfile(this.paramId).subscribe(() => {
           swalWithBootstrapButtons.fire(
             'Deleted!',
             'Your file has been deleted.',
             'success'
-          ).then(()=>{
+          ).then(() => {
             this.router.navigate(['/'])
           })
-        
+
         })
-        
+
       } else if (
         /* Read more about handling dismissals below */
         result.dismiss === Swal.DismissReason.cancel
@@ -81,6 +84,6 @@ singleProfile:any
 
 
 
-    
+
   }
 }

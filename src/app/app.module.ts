@@ -8,7 +8,7 @@ import { EditComponent } from './edit/edit.component';
 import { ListComponent } from './list/list.component';
 import { SinglelistComponent } from './singlelist/singlelist.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http'
 
 @NgModule({

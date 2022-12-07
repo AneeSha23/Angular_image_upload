@@ -11,25 +11,25 @@ import { ApiService } from '../shared/api.service';
 })
 export class CreateComponent implements OnInit {
 
-  createForm!:FormGroup
-  images:any
+  createForm!: FormGroup
+  images: any
 
-  constructor(private fb:FormBuilder,
-              private apiService : ApiService,
-              private router:Router
-              ) { }
+  constructor(private fb: FormBuilder,
+    private apiService: ApiService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
 
-    this.createForm=this.fb.group({
-      name:[''],
-      age:[''],
-      place:[''],
-      profile:['']
+    this.createForm = this.fb.group({
+      name: [''],
+      age: [''],
+      place: [''],
+      profile: ['']
     })
   }
 
-  selectImage(e:any){
+  selectImage(e: any) {
     const file = e.target.files[0];
     this.createForm.patchValue({
       profile: file
@@ -38,20 +38,20 @@ export class CreateComponent implements OnInit {
   }
 
 
-  onCreate(){
+  onCreate() {
     // console.log(this.createForm.value)
-   
-    this.apiService.postProfile(this.createForm.value.name,this.createForm.value.age,this.createForm.value.place,this.createForm.value.profile).subscribe((data)=>{
+
+    this.apiService.postProfile(this.createForm.value.name, this.createForm.value.age, this.createForm.value.place, this.createForm.value.profile).subscribe((data) => {
       // console.log(data)
       Swal.fire({
 
         icon: 'success',
         title: 'New Profile added',
         showConfirmButton: true
-      }).then(()=>{
+      }).then(() => {
         this.router.navigate(['/'])
       })
-      
+
     })
   }
 }

@@ -10,36 +10,36 @@ import { ApiService } from '../shared/api.service';
   styleUrls: ['./edit.component.css']
 })
 export class EditComponent implements OnInit {
-  editForm!:FormGroup
-  paramsId:any
-  constructor(private fb:FormBuilder,
-              private apiService:ApiService,
-              private activatedroute:ActivatedRoute,
-              private router:Router
-    ) { }
+  editForm!: FormGroup
+  paramsId: any
+  constructor(private fb: FormBuilder,
+    private apiService: ApiService,
+    private activatedroute: ActivatedRoute,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
-    this.paramsId=this.activatedroute.snapshot.params['id']
-    this.apiService.getSingleProfile(this.paramsId).subscribe((data)=>{
+    this.paramsId = this.activatedroute.snapshot.params['id']
+    this.apiService.getSingleProfile(this.paramsId).subscribe((data) => {
       // console.log(data)
       this.editForm.patchValue({
-        name:data[0].name,
-        age:data[0].age,
-        place:data[0].place,
-        profile:data[0].profile
+        name: data[0].name,
+        age: data[0].age,
+        place: data[0].place,
+        profile: data[0].profile
       })
     })
 
 
-    this.editForm=this.fb.group({
-      name:[''],
-      age:[''],
-      place:[''],
-      profile:['']
+    this.editForm = this.fb.group({
+      name: [''],
+      age: [''],
+      place: [''],
+      profile: ['']
     })
   }
 
-  selectImage(e:any){
+  selectImage(e: any) {
     const file = e.target.files[0];
     this.editForm.patchValue({
       profile: file
@@ -47,21 +47,21 @@ export class EditComponent implements OnInit {
   }
 
 
-onUpdate(){
-  // console.log(this.editForm.value)
-  this.apiService
-    .putProfile(this.editForm.value.name,this.editForm.value.age,this.editForm.value.place,this.editForm.value.profile,this.paramsId)
-    .subscribe(()=>{
-      Swal.fire({
+  onUpdate() {
+    // console.log(this.editForm.value)
+    this.apiService
+      .putProfile(this.editForm.value.name, this.editForm.value.age, this.editForm.value.place, this.editForm.value.profile, this.paramsId)
+      .subscribe(() => {
+        Swal.fire({
 
-        icon: 'success',
-        title: `"${this.editForm.value.name}" updated added` ,
-        showConfirmButton: true
-      }).then(()=>{
-        this.router.navigate(['/'])
+          icon: 'success',
+          title: `"${this.editForm.value.name}" updated added`,
+          showConfirmButton: true
+        }).then(() => {
+          this.router.navigate(['/'])
+        })
       })
-    })
-}
+  }
 
 
 }

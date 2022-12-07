@@ -6,11 +6,11 @@ import { ListComponent } from './list/list.component';
 import { SinglelistComponent } from './singlelist/singlelist.component';
 
 const routes: Routes = [
-  {path:'',component:ListComponent},
-  {path:'create',component:CreateComponent},
-  {path:'edit/:id',component:EditComponent},
-  {path:'view/:id',component:SinglelistComponent},
-  
+  { path: '', component: ListComponent },
+  { path: 'create', component: CreateComponent },
+  { path: 'edit/:id', component: EditComponent },
+  { path: 'view/:id', component: SinglelistComponent },
+
 ];
 
 @NgModule({
