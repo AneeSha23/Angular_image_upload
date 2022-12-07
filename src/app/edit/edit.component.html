@@ -25,6 +25,8 @@
             class="form-control"
           />
         </div>
+        <img id="blah" [src]="imageSrc" *ngIf="imageSrc" width="100px" height="100px"/>
+
         <button (click)="onUpdate()" type="submit" class="btn btn-info mt-2">
           Update
         </button>

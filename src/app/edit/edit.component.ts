@@ -11,6 +11,7 @@ import { ApiService } from '../shared/api.service';
 })
 export class EditComponent implements OnInit {
   editForm!: FormGroup
+  imageSrc:any
   paramsId: any
   constructor(private fb: FormBuilder,
     private apiService: ApiService,
@@ -44,6 +45,11 @@ export class EditComponent implements OnInit {
     this.editForm.patchValue({
       profile: file
     });
+
+    const reader = new FileReader();
+        reader.onload = e => this.imageSrc = reader.result;
+
+        reader.readAsDataURL(file);
   }
 
 

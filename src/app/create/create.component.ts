@@ -13,6 +13,7 @@ export class CreateComponent implements OnInit {
 
   createForm!: FormGroup
   images: any
+  imageSrc:any
 
   constructor(private fb: FormBuilder,
     private apiService: ApiService,
@@ -35,6 +36,12 @@ export class CreateComponent implements OnInit {
       profile: file
     });
     // this.createForm.get['profile'].updateValueAndValidity();
+
+
+    const reader = new FileReader();
+        reader.onload = e => this.imageSrc = reader.result;
+
+        reader.readAsDataURL(file);
   }
 
 
